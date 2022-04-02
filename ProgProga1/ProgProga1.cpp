@@ -73,14 +73,14 @@ int main(int argc, char* argv[])
             int size = array.getSizeOfVector(i);
             for (int j = 0; j < size; j++)
             {
-                Shape::type myKey = array.getElement(i, j)->key;
-                if (myKey == Shape::sphere)
+                Shape::type myKey = array.getElement(i, j)->getKey();
+                if (myKey == Shape::type::sphere)
                 {
                     Sphere* tmp = array.getSphere(i, j);
                     out << "Element number " << counter << " is a sphere with radius: ";
                     out << tmp->getRadius() << "\n";
                 };
-                if (myKey == Shape::parallelepiped)
+                if (myKey == Shape::type::parallelepiped)
                 {
                     Parallelepiped* tmp = array.getParallelepiped(i, j);
                     out << "Element number " << counter << " is a parallelepiped with edges: ";

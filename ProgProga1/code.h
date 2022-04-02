@@ -5,9 +5,11 @@
 class Shape
 {
 public:
-	enum type { sphere, parallelepiped };
+	enum class type { sphere, parallelepiped, empty };
 	type key;
 	virtual void setValues();
+	Shape();
+	type getKey();
 protected:
 private:
 };
@@ -20,6 +22,7 @@ public:
 	Sphere(type key, int radius);
 	void setValues(type key, int radius);
 	int getRadius();
+	type getKey();
 protected:
 	int radius;
 };
@@ -34,6 +37,7 @@ public:
 	int getHeigth();
 	int getWidth();
 	int getDepth();
+	type getKey();
 protected:
 	int heigth;
 	int width;

@@ -1,63 +1,79 @@
 #include "code.h"
+void Shape::setValues()
+{
+}
 
-Shape::Shape()
+Sphere::Sphere()
 {
-	radius = 0;
-	heigth = 0;
-	width = 0;
-	depth = 0;
+	key = sphere;
 }
-Shape::Shape(int radius)
+Sphere::Sphere(type key)
 {
+	this->key = key;
+	radius = 0;
+}
+Sphere::Sphere(type key, int radius)
+{
+	this->key = key;
 	this->radius = radius;
-	heigth = 0;
-	width = 0;
-	depth = 0;
 }
-Shape::Shape(int heigth, int width, int depth)
+void Sphere::setValues(type key, int radius)
 {
-	radius = 0;
-	this->heigth = heigth;
-	this->width = width;
-	this->depth = depth;
-}
-Shape::~Shape() 
-{
-
-}
-void Shape::setValues(int radius)
-{
+	this->key = key;
 	this->radius = radius;
-	heigth = 0;
-	width = 0;
-	depth = 0;
 }
-void Shape::setValues(int heigth, int width, int depth)
-{
-	radius = 0;
-	this->heigth = heigth;
-	this->width = width;
-	this->depth = depth;
-}
-int Shape::getRadius()
+int Sphere::getRadius()
 {
 	return radius;
 }
-int Shape::getHeigth()
+Parallelepiped::Parallelepiped()
+{
+	key = parallelepiped;
+}
+Parallelepiped::Parallelepiped(type key)
+{
+	this->key = key;
+	heigth = 0;
+	width = 0;
+	depth = 0;
+}
+Parallelepiped::Parallelepiped(type key, int heigth, int width, int depth)
+{
+	this->key = key;
+	this->heigth = heigth;
+	this->width = width;
+	this->depth = depth;
+}
+void Parallelepiped::setValues(type key, int heigth, int width, int depth)
+{
+	this->key = key;
+	this->heigth = heigth;
+	this->width = width;
+	this->depth = depth;
+}
+int Parallelepiped::getHeigth()
 {
 	return heigth;
 }
-int Shape::getWidth()
+int Parallelepiped::getWidth()
 {
 	return width;
 }
-int Shape::getDepth()
+int Parallelepiped::getDepth()
 {
 	return depth;
 }
 
 // Adds element to array and return hash
-std::pair <int, int> HashArray::addElement(Shape newElement)
+std::pair <int, int> HashArray::addElement(Sphere newElement)
+{
+	int hash = makeHashOfShape(newElement);
+	arrayOfVectorsOfElements[hash].push_back(newElement);
+	std::pair <int, int> tmp;
+	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
+	return tmp;
+}
+std::pair <int, int> HashArray::addElement(Parallelepiped newElement)
 {
 	int hash = makeHashOfShape(newElement);
 	arrayOfVectorsOfElements[hash].push_back(newElement);
@@ -77,7 +93,19 @@ void HashArray::removeElement(int hash, int place)
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 }
 // Replace element with this hash and place with new element
-void HashArray::replaceElement(int hash, int place, Shape newShape)
+void HashArray::replaceElement(int hash, int place, Sphere newShape)
+{
+	if (30)
+		if (place <= arrayOfVectorsOfElements[hash].size())
+		{
+			arrayOfVectorsOfElements[hash][place] = newShape;
+		}
+		else
+			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
+	else
+		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
+}
+void HashArray::replaceElement(int hash, int place, Parallelepiped newShape)
 {
 	if (30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
@@ -90,9 +118,23 @@ void HashArray::replaceElement(int hash, int place, Shape newShape)
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 }
 // Return element by hash and place
-Shape HashArray::getElement(int hash, int place)
+Sphere HashArray::getSphere(int hash, int place)
 {
-	Shape tmp;
+	Sphere tmp;
+	if (hash <= 30)
+		if (place <= arrayOfVectorsOfElements[hash].size())
+		{
+			tmp = arrayOfVectorsOfElements[hash][place];
+		}
+		else
+			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
+	else
+		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
+	return tmp;
+}
+Parallelepiped HashArray::getParallelepiped(int hash, int place)
+{
+	Parallelepiped tmp;
 	if (hash <= 30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
 		{
@@ -110,10 +152,16 @@ int HashArray::getSizeOfVector(int hash)
 	return arrayOfVectorsOfElements[hash].size();
 }
 // Return hash of element
-int HashArray::makeHashOfShape(Shape shapeToHash)
+int HashArray::makeHashOfShape(Sphere shapeToHash)
 {
 	int hash = 0;
 	hash += shapeToHash.getRadius() * 23;
+	hash = hash % 30;
+	return hash;
+}
+int HashArray::makeHashOfShape(Parallelepiped shapeToHash)
+{
+	int hash = 0;
 	hash += shapeToHash.getHeigth() * 17;
 	hash += shapeToHash.getWidth() * 11;
 	hash += shapeToHash.getDepth() * 7;

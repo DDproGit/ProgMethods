@@ -1,72 +1,61 @@
 #include "code.h"
-void Shape::setValues()
-{
-}
-Shape::type Shape::getKey()
-{
-	return key;
-};
-Shape::Shape()
-{
-	key = type::empty;
-}
+//void Shape::setValues()
+//{
+//}
+//Shape::Shape()
+//{
+//}
+//void Shape::outElement(std::ostream& out, int counter)
+//{
+//
+//};
 
 Sphere::Sphere()
 {
-	key = type::sphere;
 	radius = 0;
 }
-Sphere::Sphere(type key)
+Sphere::Sphere(int radius)
 {
-	this->key = key;
-	radius = 0;
-}
-Sphere::Sphere(type key, int radius)
-{
-	this->key = key;
 	this->radius = radius;
 }
-void Sphere::setValues(type key, int radius)
+
+void Sphere::setValues(int radius)
 {
-	this->key = key;
 	this->radius = radius;
 }
+
 int Sphere::getRadius()
 {
 	return radius;
 }
-Shape::type Sphere::getKey()
+
+void Sphere::outElement(std::ostream& out, int counter)
 {
-	return key;
+	out << "Element number " << counter << " is a sphere with radius: ";
+	out << radius << "\n";
 };
+
+
 Parallelepiped::Parallelepiped()
 {
-	key = type::parallelepiped;
 	heigth = 0;
 	width = 0;
 	depth = 0;
 }
-Parallelepiped::Parallelepiped(type key)
+Parallelepiped::Parallelepiped(int heigth, int width, int depth)
 {
-	this->key = key;
-	heigth = 0;
-	width = 0;
-	depth = 0;
-}
-Parallelepiped::Parallelepiped(type key, int heigth, int width, int depth)
-{
-	this->key = key;
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
 }
-void Parallelepiped::setValues(type key, int heigth, int width, int depth)
+
+void Parallelepiped::setValues(int heigth, int width, int depth)
 {
-	this->key = key;
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
 }
+
 int Parallelepiped::getHeigth()
 {
 	return heigth;
@@ -79,25 +68,29 @@ int Parallelepiped::getDepth()
 {
 	return depth;
 }
-Shape::type Parallelepiped::getKey()
+
+void Parallelepiped::outElement(std::ostream& out, int counter)
 {
-	return key;
+	out << "Element number " << counter << " is a parallelepiped with edges: ";
+	out << heigth << ", ";
+	out << width << ", ";
+	out << depth << "\n";
 };
 
 // Adds element to array and return hash
-std::pair <int, int> HashArray::addElement(Sphere newElement)
+std::pair <int, int> HashArray::addElement(Sphere* newElement)
 {
-	Sphere* myElement = &newElement;
-	int hash = makeHashOfShape(newElement);
+	Sphere* myElement = newElement;
+	int hash = makeHashOfShape(*newElement);
 	arrayOfVectorsOfElements[hash].push_back(myElement);
 	std::pair <int, int> tmp;
 	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
 	return tmp;
 }
-std::pair <int, int> HashArray::addElement(Parallelepiped newElement)
+std::pair <int, int> HashArray::addElement(Parallelepiped* newElement)
 {
-	Parallelepiped* myElement = &newElement;
-	int hash = makeHashOfShape(newElement);
+	Parallelepiped* myElement = newElement;
+	int hash = makeHashOfShape(*newElement);
 	arrayOfVectorsOfElements[hash].push_back(myElement);
 	std::pair <int, int> tmp;
 	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
@@ -146,22 +139,7 @@ void HashArray::replaceElement(int hash, int place, Parallelepiped newShape)
 // Return element by hash and place
 Shape* HashArray::getElement(int hash, int place)
 {
-	Shape* tmp = new Shape;
-	if (hash <= 30)
-		if (place <= arrayOfVectorsOfElements[hash].size())
-		{
-			Shape* tmp = (Shape*)arrayOfVectorsOfElements[hash][place];
-		}
-		else
-		{
-			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
-			tmp = new Shape;
-		}
-	else
-		{
-			std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
-			tmp = new Shape;
-		}
+	Shape* tmp = arrayOfVectorsOfElements[hash][place];
 	return tmp;
 };
 Sphere* HashArray::getSphere(int hash, int place)

@@ -42,24 +42,22 @@ int main(int argc, char* argv[])
             case 0:
             {
                 int radius = 0;
-                Shape::type key = static_cast<Shape::type>(type);
                 in >> radius;
-                Sphere tmp(key, radius);
+                Sphere *tmp = new Sphere(radius);
                 cout << "Element number " << i << ": ";
-                cout << tmp.getRadius() << ". That's a sphere.\n";
+                cout << tmp->getRadius() << ". That's a sphere.\n";
                 myElement = array.addElement(tmp);
                 break;
             }
             case 1:
             {
                 int heigth, width, depth = 0;
-                Shape::type key = static_cast<Shape::type>(type);
                 in >> heigth >> width >> depth;
-                Parallelepiped tmp(key, heigth, width, depth);
+                Parallelepiped* tmp = new Parallelepiped(heigth, width, depth);
                 cout << "Element number " << i << ": ";
-                cout << tmp.getHeigth() << ", ";
-                cout << tmp.getWidth() << ", ";
-                cout << tmp.getDepth() << ". That's a parallelepiped.\n";
+                cout << tmp->getHeigth() << ", ";
+                cout << tmp->getWidth() << ", ";
+                cout << tmp->getDepth() << ". That's a parallelepiped.\n";
                 myElement = array.addElement(tmp);
                 break;
             }
@@ -73,21 +71,9 @@ int main(int argc, char* argv[])
             int size = array.getSizeOfVector(i);
             for (int j = 0; j < size; j++)
             {
-                Shape::type myKey = array.getElement(i, j)->getKey();
-                if (myKey == Shape::type::sphere)
-                {
-                    Sphere* tmp = array.getSphere(i, j);
-                    out << "Element number " << counter << " is a sphere with radius: ";
-                    out << tmp->getRadius() << "\n";
-                };
-                if (myKey == Shape::type::parallelepiped)
-                {
-                    Parallelepiped* tmp = array.getParallelepiped(i, j);
-                    out << "Element number " << counter << " is a parallelepiped with edges: ";
-                    out << tmp->getHeigth() << ", ";
-                    out << tmp->getWidth() << ", ";
-                    out << tmp->getDepth() << "\n";
-                };
+                Shape* tmp = array.getElement(i, j);
+                tmp->outElement(out, counter);
+                counter++;
             }
         }
     }

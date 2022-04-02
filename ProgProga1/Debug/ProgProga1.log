@@ -1,10 +1,9 @@
 ﻿  ProgProga1.cpp
   code.cpp
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(110,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(121,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(135,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(151,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(171,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(185,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(103,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(114,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(128,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(149,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(163,13): warning C4018: <=: несоответствие типов со знаком и без знака
   Создание кода...
-  ProgProga1.vcxproj -> C:\Users\Nikita\source\repos\ProgProga1\Debug\ProgProga1.exe
+  ProgProga1.vcxproj -> C:\Users\Lenovo\Documents\GitHub\ProgMethods\Debug\ProgProga1.exe

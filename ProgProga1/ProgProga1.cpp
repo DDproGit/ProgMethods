@@ -91,5 +91,6 @@ int main(int argc, char* argv[])
         }
     }
     out << "Total number of objects: " << counter << "\n";
+    cout << "228";
     return 0;
 }

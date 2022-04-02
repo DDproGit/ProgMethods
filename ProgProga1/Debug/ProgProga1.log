@@ -1,2 +1,7 @@
 ﻿  ProgProga1.cpp
+  code.cpp
+C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(72,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(83,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Nikita\source\repos\ProgProga1\ProgProga1\code.cpp(97,13): warning C4018: <=: несоответствие типов со знаком и без знака
+  Создание кода...
   ProgProga1.vcxproj -> C:\Users\Nikita\source\repos\ProgProga1\Debug\ProgProga1.exe

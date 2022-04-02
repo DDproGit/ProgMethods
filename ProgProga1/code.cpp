@@ -6,6 +6,7 @@ void Shape::setValues()
 Sphere::Sphere()
 {
 	key = sphere;
+	radius = 0;
 }
 Sphere::Sphere(type key)
 {
@@ -29,6 +30,9 @@ int Sphere::getRadius()
 Parallelepiped::Parallelepiped()
 {
 	key = parallelepiped;
+	heigth = 0;
+	width = 0;
+	depth = 0;
 }
 Parallelepiped::Parallelepiped(type key)
 {
@@ -67,16 +71,18 @@ int Parallelepiped::getDepth()
 // Adds element to array and return hash
 std::pair <int, int> HashArray::addElement(Sphere newElement)
 {
+	Sphere* myElement = &newElement;
 	int hash = makeHashOfShape(newElement);
-	arrayOfVectorsOfElements[hash].push_back(newElement);
+	arrayOfVectorsOfElements[hash].push_back(myElement);
 	std::pair <int, int> tmp;
 	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
 	return tmp;
 }
 std::pair <int, int> HashArray::addElement(Parallelepiped newElement)
 {
+	Parallelepiped* myElement = &newElement;
 	int hash = makeHashOfShape(newElement);
-	arrayOfVectorsOfElements[hash].push_back(newElement);
+	arrayOfVectorsOfElements[hash].push_back(myElement);
 	std::pair <int, int> tmp;
 	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
 	return tmp;
@@ -98,7 +104,9 @@ void HashArray::replaceElement(int hash, int place, Sphere newShape)
 	if (30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
 		{
-			arrayOfVectorsOfElements[hash][place] = newShape;
+			Sphere* myElement = new Sphere();
+			myElement = &newShape;
+			arrayOfVectorsOfElements[hash][place] = myElement;
 		}
 		else
 			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
@@ -110,7 +118,9 @@ void HashArray::replaceElement(int hash, int place, Parallelepiped newShape)
 	if (30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
 		{
-			arrayOfVectorsOfElements[hash][place] = newShape;
+			Parallelepiped* myElement = new Parallelepiped();
+			myElement = &newShape;
+			arrayOfVectorsOfElements[hash][place] = myElement;
 		}
 		else
 			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
@@ -118,13 +128,29 @@ void HashArray::replaceElement(int hash, int place, Parallelepiped newShape)
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 }
 // Return element by hash and place
-Sphere HashArray::getSphere(int hash, int place)
+Shape* HashArray::getElement(int hash, int place)
 {
-	Sphere tmp;
+	{
+		Shape* tmp = new Shape;
+		if (hash <= 30)
+			if (place <= arrayOfVectorsOfElements[hash].size())
+			{
+				tmp = (Shape*)arrayOfVectorsOfElements[hash][place];
+			}
+			else
+				std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
+		else
+			std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
+		return tmp;
+	}
+};
+Sphere* HashArray::getSphere(int hash, int place)
+{
+	Sphere* tmp = new Sphere;
 	if (hash <= 30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
 		{
-			tmp = arrayOfVectorsOfElements[hash][place];
+			tmp = (Sphere*)arrayOfVectorsOfElements[hash][place];
 		}
 		else
 			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
@@ -132,13 +158,13 @@ Sphere HashArray::getSphere(int hash, int place)
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 	return tmp;
 }
-Parallelepiped HashArray::getParallelepiped(int hash, int place)
+Parallelepiped* HashArray::getParallelepiped(int hash, int place)
 {
-	Parallelepiped tmp;
+	Parallelepiped* tmp = new Parallelepiped;
 	if (hash <= 30)
 		if (place <= arrayOfVectorsOfElements[hash].size())
 		{
-			tmp = arrayOfVectorsOfElements[hash][place];
+			tmp = (Parallelepiped*)arrayOfVectorsOfElements[hash][place];
 		}
 		else
 			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";

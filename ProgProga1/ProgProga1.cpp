@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
             case 0:
             {
                 int radius = 0;
-                Shape::type key = static_cast<Shape::type>(i);
+                Shape::type key = static_cast<Shape::type>(type);
                 in >> radius;
                 Sphere tmp(key, radius);
                 cout << "Element number " << i << ": ";
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
             case 1:
             {
                 int heigth, width, depth = 0;
-                Shape::type key = static_cast<Shape::type>(i);
+                Shape::type key = static_cast<Shape::type>(type);
                 in >> heigth >> width >> depth;
                 Parallelepiped tmp(key, heigth, width, depth);
                 cout << "Element number " << i << ": ";
@@ -73,19 +73,20 @@ int main(int argc, char* argv[])
             int size = array.getSizeOfVector(i);
             for (int j = 0; j < size; j++)
             {
-                if (array.getElement(i, j).key == Shape::sphere)
+                Shape::type myKey = array.getElement(i, j)->key;
+                if (myKey == Shape::sphere)
                 {
-                    Sphere tmp = array.getSphere(i, j);
+                    Sphere* tmp = array.getSphere(i, j);
                     out << "Element number " << counter << " is a sphere with radius: ";
-                    out << tmp.getRadius() << "\n";
+                    out << tmp->getRadius() << "\n";
                 };
-                if (array.getElement(i, j).key == Shape::parallelepiped)
+                if (myKey == Shape::parallelepiped)
                 {
-                    Parallelepiped tmp = array.getParallelepiped(i, j);
+                    Parallelepiped* tmp = array.getParallelepiped(i, j);
                     out << "Element number " << counter << " is a parallelepiped with edges: ";
-                    out << tmp.getHeigth() << ", ";
-                    out << tmp.getWidth() << ", ";
-                    out << tmp.getDepth() << "\n";
+                    out << tmp->getHeigth() << ", ";
+                    out << tmp->getWidth() << ", ";
+                    out << tmp->getDepth() << "\n";
                 };
             }
         }

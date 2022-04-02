@@ -52,15 +52,15 @@ public:
 	void replaceElement(int hash, int place, Sphere newShape);
 	void replaceElement(int hash, int place, Parallelepiped newShape);
 	// Return element by hash and place
-	Shape getElement(int hash, int place);
-	Sphere getSphere(int hash, int place);
-	Parallelepiped getParallelepiped(int hash, int place);
+	Shape* getElement(int hash, int place);
+	Sphere* getSphere(int hash, int place);
+	Parallelepiped* getParallelepiped(int hash, int place);
 	int getSizeOfVector(int hash);
 	// Return hash of element
 	int makeHashOfShape(Sphere shapeToHash);
 	int makeHashOfShape(Parallelepiped shapeToHash);
 	std::pair <int, int> findElement();
 protected:
-	std::vector<Shape> arrayOfVectorsOfElements[30];
+	std::vector<Shape*> arrayOfVectorsOfElements[30];
 private:
 };

@@ -1,14 +1,5 @@
 #include "code.h"
-//void Shape::setValues()
-//{
-//}
-//Shape::Shape()
-//{
-//}
-//void Shape::outElement(std::ostream& out, int counter)
-//{
-//
-//};
+#include <iostream>
 
 Sphere::Sphere()
 {
@@ -76,7 +67,60 @@ void Parallelepiped::outElement(std::ostream& out, int counter)
 	out << width << ", ";
 	out << depth << "\n";
 };
-
+//dlkasdad
+void HashArray::fillContainer(std::istream& in)
+{
+	int n = 0;
+	in >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int type = 0;
+		in >> type;
+		switch (type)
+		{
+		case 0:
+		{
+			int radius = 0;
+			in >> radius;
+			Sphere* tmp = new Sphere(radius);
+			std::cout << "Element number " << i << ": ";
+			std::cout << tmp->getRadius() << ". That's a sphere.\n";
+			this->addElement(tmp);
+			break;
+		}
+		case 1:
+		{
+			int heigth, width, depth = 0;
+			in >> heigth >> width >> depth;
+			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth);
+			std::cout << "Element number " << i << ": ";
+			std::cout << tmp->getHeigth() << ", ";
+			std::cout << tmp->getWidth() << ", ";
+			std::cout << tmp->getDepth() << ". That's a parallelepiped.\n";
+			this->addElement(tmp);
+			break;
+		}
+		}
+	}
+	setCountOfElements(n);
+}
+void HashArray::showContainer(std::ostream & out)
+{
+	int counter = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		if (this->getSizeOfVector(i) != 0)
+		{
+			int size = this->getSizeOfVector(i);
+			for (int j = 0; j < size; j++)
+			{
+				Shape* tmp = this->getElement(i, j);
+				tmp->outElement(out, counter);
+				counter++;
+			}
+		}
+	}
+}
 // Adds element to array and return hash
 std::pair <int, int> HashArray::addElement(Sphere* newElement)
 {
@@ -191,4 +235,12 @@ int HashArray::makeHashOfShape(Parallelepiped shapeToHash)
 	hash += shapeToHash.getDepth() * 7;
 	hash = hash % 30;
 	return hash;
+}
+void HashArray::setCountOfElements(int count)
+{
+	countOfElements = count;
+}
+int HashArray::getCountOfElements()
+{
+	return countOfElements;
 }

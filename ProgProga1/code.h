@@ -43,6 +43,9 @@ protected:
 class HashArray
 {
 public:
+	//kausda
+	void fillContainer(std::istream& in);
+	void showContainer(std::ostream& out);
 	// Adds element to array and return hash and place
 	std::pair <int, int> addElement(Sphere* newElement);
 	std::pair <int, int> addElement(Parallelepiped* newElement);
@@ -59,8 +62,11 @@ public:
 	// Return hash of element
 	int makeHashOfShape(Sphere shapeToHash);
 	int makeHashOfShape(Parallelepiped shapeToHash);
+	void setCountOfElements(int count);
+	int getCountOfElements();
 	std::pair <int, int> findElement();
 protected:
 	std::vector<Shape*> arrayOfVectorsOfElements[30];
+	int countOfElements;
 private:
 };

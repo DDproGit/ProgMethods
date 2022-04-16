@@ -16,28 +16,32 @@ class Sphere : public Shape
 {
 public:
 	Sphere();
-	Sphere(int radius);
-	void setValues(int radius);
+	Sphere(int radius, int temperature);
+	void setValues(int radius, int temperature);
 	void outElement(std::ostream& out, int counter);
 	int getRadius();
+	int getTemperature();
 protected:
 	int radius;
+	int temperature;
 };
 
 class Parallelepiped : public Shape
 {
 public:
 	Parallelepiped();
-	Parallelepiped(int heigth, int width, int depth);
-	void setValues(int heigth, int width, int depth);
+	Parallelepiped(int heigth, int width, int depth, int temperature);
+	void setValues(int heigth, int width, int depth, int temperature);
 	void outElement(std::ostream& out, int counter);
 	int getHeigth();
 	int getWidth();
 	int getDepth();
+	int getTemperature();
 protected:
 	int heigth;
 	int width;
 	int depth;
+	int temperature;
 };
 
 class HashArray

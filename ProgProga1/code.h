@@ -7,6 +7,7 @@ class Shape
 public:
 	//virtual void setValues() = 0;
 	virtual void outElement(std::ostream& out, int counted) = 0;
+	virtual int getVolume() = 0;
 	//Shape();
 protected:
 private:
@@ -19,6 +20,7 @@ public:
 	Sphere(int radius);
 	void setValues(int radius);
 	void outElement(std::ostream& out, int counter);
+	int getVolume();
 	int getRadius();
 protected:
 	int radius;
@@ -31,6 +33,7 @@ public:
 	Parallelepiped(int heigth, int width, int depth);
 	void setValues(int heigth, int width, int depth);
 	void outElement(std::ostream& out, int counter);
+	int getVolume();
 	int getHeigth();
 	int getWidth();
 	int getDepth();

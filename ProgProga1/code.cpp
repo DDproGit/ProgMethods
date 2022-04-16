@@ -23,8 +23,14 @@ int Sphere::getRadius()
 void Sphere::outElement(std::ostream& out, int counter)
 {
 	out << "Element number " << counter << " is a sphere with radius: ";
-	out << radius << "\n";
+	out << radius << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
 };
+int Sphere::getVolume()
+{
+	return 4 / 3 * 3.14 * getRadius();
+}
 
 
 Parallelepiped::Parallelepiped()
@@ -65,8 +71,14 @@ void Parallelepiped::outElement(std::ostream& out, int counter)
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
-	out << depth << "\n";
+	out << depth << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
 };
+int Parallelepiped::getVolume()
+{
+	return heigth * width * depth;
+}
 //dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
@@ -84,7 +96,8 @@ void HashArray::fillContainer(std::istream& in)
 			in >> radius;
 			Sphere* tmp = new Sphere(radius);
 			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getRadius() << ". That's a sphere.\n";
+			std::cout << tmp->getRadius();
+			std::cout << tmp->getVolume() << ". That's a sphere.\n";
 			this->addElement(tmp);
 			break;
 		}

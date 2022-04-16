@@ -1,10 +1,11 @@
 ﻿  ProgProga1.cpp
   code.cpp
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(147,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(158,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(172,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(193,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(207,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(192,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(203,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(217,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(231,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(252,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(266,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(280,13): warning C4018: <=: несоответствие типов со знаком и без знака
   Создание кода...
-  LINK : не найден или не выполнена сборка C:\Users\Lenovo\Documents\GitHub\ProgMethods\Debug\ProgProga1.exe при последней инкрементной компоновке; выполняется полная компоновка
   ProgProga1.vcxproj -> C:\Users\Lenovo\Documents\GitHub\ProgMethods\Debug\ProgProga1.exe

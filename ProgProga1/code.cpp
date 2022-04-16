@@ -67,6 +67,32 @@ void Parallelepiped::outElement(std::ostream& out, int counter)
 	out << width << ", ";
 	out << depth << "\n";
 };
+
+
+Tetraedr::Tetraedr()
+{
+	this->heigth = 0;
+}
+Tetraedr::Tetraedr(int heigth)
+{
+	this->heigth = heigth;
+}
+void Tetraedr::setValues(int heigth)
+{
+	this->heigth = heigth;
+}
+void Tetraedr::outElement(std::ostream& out, int counter)
+{
+	out << "Element number " << counter << " is a tetraedr with edge: ";
+	out << heigth << "\n";
+}
+int Tetraedr::getHeigth()
+{
+	return heigth;
+}
+
+
+
 //dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
@@ -97,6 +123,16 @@ void HashArray::fillContainer(std::istream& in)
 			std::cout << tmp->getHeigth() << ", ";
 			std::cout << tmp->getWidth() << ", ";
 			std::cout << tmp->getDepth() << ". That's a parallelepiped.\n";
+			this->addElement(tmp);
+			break;
+		}
+		case 2:
+		{
+			int heigth = 0;
+			in >> heigth;
+			Tetraedr* tmp = new Tetraedr(heigth);
+			std::cout << "Element number " << i << ": ";
+			std::cout << tmp->getHeigth() << ". That's a tetraedr.\n";
 			this->addElement(tmp);
 			break;
 		}
@@ -134,6 +170,15 @@ std::pair <int, int> HashArray::addElement(Sphere* newElement)
 std::pair <int, int> HashArray::addElement(Parallelepiped* newElement)
 {
 	Parallelepiped* myElement = newElement;
+	int hash = makeHashOfShape(*newElement);
+	arrayOfVectorsOfElements[hash].push_back(myElement);
+	std::pair <int, int> tmp;
+	tmp = std::make_pair(hash, arrayOfVectorsOfElements[hash].size() - 1);
+	return tmp;
+}
+std::pair <int, int> HashArray::addElement(Tetraedr* newElement)
+{
+	Tetraedr* myElement = newElement;
 	int hash = makeHashOfShape(*newElement);
 	arrayOfVectorsOfElements[hash].push_back(myElement);
 	std::pair <int, int> tmp;
@@ -180,6 +225,20 @@ void HashArray::replaceElement(int hash, int place, Parallelepiped newShape)
 	else
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 }
+void HashArray::replaceElement(int hash, int place, Tetraedr newShape)
+{
+	if (30)
+		if (place <= arrayOfVectorsOfElements[hash].size())
+		{
+			Tetraedr* myElement = new Tetraedr();
+			myElement = &newShape;
+			arrayOfVectorsOfElements[hash][place] = myElement;
+		}
+		else
+			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
+	else
+		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
+}
 // Return element by hash and place
 Shape* HashArray::getElement(int hash, int place)
 {
@@ -214,6 +273,20 @@ Parallelepiped* HashArray::getParallelepiped(int hash, int place)
 		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
 	return tmp;
 }
+Tetraedr* HashArray::getTetraedr(int hash, int place)
+{
+	Tetraedr* tmp = new Tetraedr;
+	if (hash <= 30)
+		if (place <= arrayOfVectorsOfElements[hash].size())
+		{
+			tmp = (Tetraedr*)arrayOfVectorsOfElements[hash][place];
+		}
+		else
+			std::cout << "Wrong position in vector, pos = " << place << ", but size is " << arrayOfVectorsOfElements[hash].size() << "\n";
+	else
+		std::cout << "Wrong position in array, pos = " << hash << ", but size is " << 30 << "\n";
+	return tmp;
+}
 // Return size of vector
 int HashArray::getSizeOfVector(int hash)
 {
@@ -236,6 +309,14 @@ int HashArray::makeHashOfShape(Parallelepiped shapeToHash)
 	hash = hash % 30;
 	return hash;
 }
+int HashArray::makeHashOfShape(Tetraedr shapeToHash)
+{
+	int hash = 0;
+	hash += shapeToHash.getHeigth() * 17;
+	hash = hash % 30;
+	return hash;
+}
+
 void HashArray::setCountOfElements(int count)
 {
 	countOfElements = count;

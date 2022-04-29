@@ -3,7 +3,8 @@
 
 Sphere::Sphere()
 {
-	radius = 0;
+	this->radius = 0;
+	this->temperature = 0;
 }
 Sphere::Sphere(int radius, int temperature)
 {
@@ -38,6 +39,7 @@ Parallelepiped::Parallelepiped()
 	heigth = 0;
 	width = 0;
 	depth = 0;
+	temperature = 0;
 }
 Parallelepiped::Parallelepiped(int heigth, int width, int depth, int temperature)
 {

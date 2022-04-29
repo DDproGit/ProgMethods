@@ -6,7 +6,8 @@ class Shape
 {
 public:
 	//virtual void setValues() = 0;
-	virtual void outElement(std::ostream& out, int counted) = 0;
+	virtual void outElement(std::ostream& out, int counter) = 0;
+	virtual void outElement(std::ostream& out, int counter, int limit) = 0;
 	//Shape();
 protected:
 private:
@@ -19,6 +20,7 @@ public:
 	Sphere(int radius);
 	void setValues(int radius);
 	void outElement(std::ostream& out, int counter);
+	void outElement(std::ostream& out, int counter, int limit);
 	int getRadius();
 protected:
 	int radius;
@@ -31,6 +33,7 @@ public:
 	Parallelepiped(int heigth, int width, int depth);
 	void setValues(int heigth, int width, int depth);
 	void outElement(std::ostream& out, int counter);
+	void outElement(std::ostream& out, int counter, int limit);
 	int getHeigth();
 	int getWidth();
 	int getDepth();
@@ -45,7 +48,8 @@ class HashArray
 public:
 	//kausda
 	void fillContainer(std::istream& in);
-	void showContainer(std::ostream& out);
+	void saveContainer(std::ostream& out);
+	void showContainer();
 	// Adds element to array and return hash and place
 	std::pair <int, int> addElement(Sphere* newElement);
 	std::pair <int, int> addElement(Parallelepiped* newElement);
@@ -64,7 +68,7 @@ public:
 	int makeHashOfShape(Parallelepiped shapeToHash);
 	void setCountOfElements(int count);
 	int getCountOfElements();
-	std::pair <int, int> findElement();
+	//std::pair <int, int> findElement();
 protected:
 	std::vector<Shape*> arrayOfVectorsOfElements[30];
 	int countOfElements;

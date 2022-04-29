@@ -1,8 +1,10 @@
-﻿  code.cpp
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(32,22): warning C4244: return: преобразование "double" в "int", возможна потеря данных
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(160,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(171,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(185,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(206,13): warning C4018: <=: несоответствие типов со знаком и без знака
-C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(220,13): warning C4018: <=: несоответствие типов со знаком и без знака
+﻿  ProgProga1.cpp
+  code.cpp
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(33,22): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(178,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(189,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(203,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(224,13): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Lenovo\Documents\GitHub\ProgMethods\ProgProga1\code.cpp(238,13): warning C4018: <=: несоответствие типов со знаком и без знака
+  Создание кода...
   ProgProga1.vcxproj -> C:\Users\Lenovo\Documents\GitHub\ProgMethods\Debug\ProgProga1.exe

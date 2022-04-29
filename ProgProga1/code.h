@@ -48,7 +48,8 @@ class HashArray
 public:
 	//kausda
 	void fillContainer(std::istream& in);
-	void showContainer(std::ostream& out);
+	void saveContainer(std::ostream& out);
+	void showContainer();
 	// Adds element to array and return hash and place
 	std::pair <int, int> addElement(Sphere* newElement);
 	std::pair <int, int> addElement(Parallelepiped* newElement);
@@ -67,9 +68,12 @@ public:
 	int makeHashOfShape(Parallelepiped shapeToHash);
 	void setCountOfElements(int count);
 	int getCountOfElements();
-	std::pair <int, int> findElement();
+	void sortElements();
+	//std::pair <int, int> findElement();
 protected:
 	std::vector<Shape*> arrayOfVectorsOfElements[30];
 	int countOfElements;
 private:
+	int size = 30;
+	/*bool comp(Shape& a, Shape& b);*/
 };

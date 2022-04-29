@@ -1,5 +1,6 @@
 #include "code.h"
 #include <iostream>
+#include <algorithm>
 
 Sphere::Sphere()
 {
@@ -96,7 +97,7 @@ void HashArray::fillContainer(std::istream& in)
 			in >> radius;
 			Sphere* tmp = new Sphere(radius);
 			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getRadius();
+			std::cout << tmp->getRadius() << " ";
 			std::cout << tmp->getVolume() << ". That's a sphere.\n";
 			this->addElement(tmp);
 			break;
@@ -109,7 +110,7 @@ void HashArray::fillContainer(std::istream& in)
 			std::cout << "Element number " << i << ": ";
 			std::cout << tmp->getHeigth() << ", ";
 			std::cout << tmp->getWidth() << ", ";
-			std::cout << tmp->getDepth() << ". That's a parallelepiped.\n";
+			std::cout << tmp->getDepth() << " " << tmp->getVolume() << ". That's a parallelepiped.\n";
 			this->addElement(tmp);
 			break;
 		}
@@ -117,7 +118,7 @@ void HashArray::fillContainer(std::istream& in)
 	}
 	setCountOfElements(n);
 }
-void HashArray::showContainer(std::ostream & out)
+void HashArray::saveContainer(std::ostream & out)
 {
 	int counter = 0;
 	for (int i = 0; i < 30; i++)
@@ -129,6 +130,23 @@ void HashArray::showContainer(std::ostream & out)
 			{
 				Shape* tmp = this->getElement(i, j);
 				tmp->outElement(out, counter);
+				counter++;
+			}
+		}
+	}
+}
+void HashArray::showContainer()
+{
+	int counter = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		if (this->getSizeOfVector(i) != 0)
+		{
+			int size = this->getSizeOfVector(i);
+			for (int j = 0; j < size; j++)
+			{
+				Shape* tmp = this->getElement(i, j);
+				tmp->outElement(std::cout, counter);
 				counter++;
 			}
 		}
@@ -256,4 +274,16 @@ void HashArray::setCountOfElements(int count)
 int HashArray::getCountOfElements()
 {
 	return countOfElements;
+}
+bool comp(Shape* a, Shape* b)
+{
+	return a->getVolume() < b->getVolume();
+}
+void HashArray::sortElements()
+{
+	for (int i = 0; i < size; i++)
+	{
+		std::sort(arrayOfVectorsOfElements[i].begin(),
+			arrayOfVectorsOfElements[i].end(), comp);
+	}
 }

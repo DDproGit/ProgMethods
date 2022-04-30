@@ -11,5 +11,8 @@ Element number 9 is a parallelepiped with edges: 3, 2, 5
 Element number 10 is a sphere with radius: 6
 Element number 11 is a sphere with radius: 6
 Element number 12 is a parallelepiped with edges: 6, 6, 9
-Element number 13 is a parallelepiped with edges: 11, 5, 12
-Total number of objects: 14
+Element number 13 is a tetraedr with edge: 5
+Element number 14 is a parallelepiped with edges: 11, 5, 12
+Element number 15 is a tetraedr with edge: 14
+Element number 16 is a tetraedr with edge: 7
+Total number of objects: 17

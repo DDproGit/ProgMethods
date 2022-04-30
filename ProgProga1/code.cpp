@@ -31,6 +31,13 @@ void Sphere::outElement(std::ostream& out, int counter)
 	out << "Element number " << counter << " is a sphere with radius: ";
 	out << radius << " " << temperature << "\n";
 };
+void Sphere::outElement(std::ostream& out, int counter, int limit)
+{
+	if (limit == 1)
+		return;
+	out << "Element number " << counter << " is a sphere with radius: ";
+	out << radius << "\n";
+};
 
 
 Parallelepiped::Parallelepiped()
@@ -106,6 +113,16 @@ int Tetraedr::getHeigth()
 
 
 
+void Parallelepiped::outElement(std::ostream& out, int counter, int limit)
+{
+	if (limit == 2)
+		return;
+	out << "Element number " << counter << " is a parallelepiped with edges: ";
+	out << heigth << ", ";
+	out << width << ", ";
+	out << depth << "\n";
+};
+
 //dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
@@ -155,7 +172,7 @@ void HashArray::fillContainer(std::istream& in)
 	}
 	setCountOfElements(n);
 }
-void HashArray::showContainer(std::ostream & out)
+void HashArray::saveContainer(std::ostream & out)
 {
 	int counter = 0;
 	for (int i = 0; i < 30; i++)
@@ -167,6 +184,26 @@ void HashArray::showContainer(std::ostream & out)
 			{
 				Shape* tmp = this->getElement(i, j);
 				tmp->outElement(out, counter);
+				counter++;
+			}
+		}
+	}
+}
+void HashArray::showContainer()
+{
+	std::cout << "Show every element - 0, without spheres - 1, without parallelepipeds - 2: ";
+	int limiter = 0;
+	std::cin >> limiter;
+	int counter = 0;
+	for (int i = 0; i < 30; i++)
+	{
+		if (this->getSizeOfVector(i) != 0)
+		{
+			int size = this->getSizeOfVector(i);
+			for (int j = 0; j < size; j++)
+			{
+				Shape* tmp = this->getElement(i, j);
+				tmp->outElement(std::cout, counter, limiter);
 				counter++;
 			}
 		}

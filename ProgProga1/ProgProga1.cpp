@@ -32,7 +32,8 @@ int main(int argc, char* argv[])
         out.open(filename);
     }
     array.fillContainer(in);
-    array.showContainer(out);
+    array.showContainer();
+    array.saveContainer(out);
     out << "Total number of objects: " << array.getCountOfElements() << "\n";
     return 0;
 }

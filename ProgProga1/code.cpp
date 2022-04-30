@@ -5,25 +5,31 @@ Sphere::Sphere()
 {
 	radius = 0;
 }
-Sphere::Sphere(int radius)
+Sphere::Sphere(int radius, int temperature)
 {
 	this->radius = radius;
+	this->temperature = temperature;
 }
 
-void Sphere::setValues(int radius)
+void Sphere::setValues(int radius, int temperature)
 {
 	this->radius = radius;
+	this->temperature = temperature;
 }
 
 int Sphere::getRadius()
 {
 	return radius;
 }
+int Sphere::getTemperature()
+{
+	return temperature;
+}
 
 void Sphere::outElement(std::ostream& out, int counter)
 {
 	out << "Element number " << counter << " is a sphere with radius: ";
-	out << radius << "\n";
+	out << radius << " " << temperature << "\n";
 };
 
 
@@ -33,18 +39,20 @@ Parallelepiped::Parallelepiped()
 	width = 0;
 	depth = 0;
 }
-Parallelepiped::Parallelepiped(int heigth, int width, int depth)
+Parallelepiped::Parallelepiped(int heigth, int width, int depth, int temperature)
 {
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
+	this->temperature = temperature;
 }
 
-void Parallelepiped::setValues(int heigth, int width, int depth)
+void Parallelepiped::setValues(int heigth, int width, int depth, int temperature)
 {
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
+	this->temperature = temperature;
 }
 
 int Parallelepiped::getHeigth()
@@ -59,13 +67,18 @@ int Parallelepiped::getDepth()
 {
 	return depth;
 }
+int Parallelepiped::getTemperature()
+{
+	return temperature;
+}
 
 void Parallelepiped::outElement(std::ostream& out, int counter)
 {
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
-	out << depth << "\n";
+	out << depth << ", ";
+	out << temperature << "\n";
 };
 
 
@@ -106,23 +119,25 @@ void HashArray::fillContainer(std::istream& in)
 		{
 		case 0:
 		{
-			int radius = 0;
-			in >> radius;
-			Sphere* tmp = new Sphere(radius);
+			int radius, temperature = 0;
+			in >> radius >> temperature;
+			Sphere* tmp = new Sphere(radius, temperature);
 			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getRadius() << ". That's a sphere.\n";
+			std::cout << tmp->getRadius() << ", ";
+			std::cout << tmp->getTemperature() << ". That's a sphere.\n";
 			this->addElement(tmp);
 			break;
 		}
 		case 1:
 		{
-			int heigth, width, depth = 0;
-			in >> heigth >> width >> depth;
-			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth);
+			int heigth, width, depth, temperature = 0;
+			in >> heigth >> width >> depth >> temperature;
+			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature);
 			std::cout << "Element number " << i << ": ";
 			std::cout << tmp->getHeigth() << ", ";
 			std::cout << tmp->getWidth() << ", ";
-			std::cout << tmp->getDepth() << ". That's a parallelepiped.\n";
+			std::cout << tmp->getDepth() << ", ";
+			std::cout << tmp->getTemperature() << ". That's a parallelepiped.\n";
 			this->addElement(tmp);
 			break;
 		}

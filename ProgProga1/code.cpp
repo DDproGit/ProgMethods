@@ -1,5 +1,6 @@
 #include "code.h"
 #include <iostream>
+#include <algorithm>
 
 Sphere::Sphere()
 {
@@ -36,8 +37,14 @@ void Sphere::outElement(std::ostream& out, int counter, int limit)
 	if (limit == 1)
 		return;
 	out << "Element number " << counter << " is a sphere with radius: ";
-	out << radius << "\n";
+	out << radius << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
 };
+int Sphere::getVolume()
+{
+	return 4 / 3 * 3.14 * getRadius();
+}
 
 
 Parallelepiped::Parallelepiped()
@@ -84,8 +91,9 @@ void Parallelepiped::outElement(std::ostream& out, int counter)
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
-	out << depth << ", ";
-	out << temperature << "\n";
+	out << depth << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
 };
 
 
@@ -120,9 +128,14 @@ void Parallelepiped::outElement(std::ostream& out, int counter, int limit)
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
-	out << depth << "\n";
+	out << depth << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
 };
-
+int Parallelepiped::getVolume()
+{
+	return heigth * width * depth;
+}
 //dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
@@ -141,7 +154,8 @@ void HashArray::fillContainer(std::istream& in)
 			Sphere* tmp = new Sphere(radius, temperature);
 			std::cout << "Element number " << i << ": ";
 			std::cout << tmp->getRadius() << ", ";
-			std::cout << tmp->getTemperature() << ". That's a sphere.\n";
+			std::cout << tmp->getTemperature() << " ";
+			std::cout << tmp->getVolume() << ". That's a sphere.\n";
 			this->addElement(tmp);
 			break;
 		}
@@ -154,7 +168,9 @@ void HashArray::fillContainer(std::istream& in)
 			std::cout << tmp->getHeigth() << ", ";
 			std::cout << tmp->getWidth() << ", ";
 			std::cout << tmp->getDepth() << ", ";
-			std::cout << tmp->getTemperature() << ". That's a parallelepiped.\n";
+			std::cout << tmp->getTemperature() << " ";
+			std::cout << tmp->getVolume() << ". That's a parallelepiped.\n";
+
 			this->addElement(tmp);
 			break;
 		}
@@ -376,4 +392,16 @@ void HashArray::setCountOfElements(int count)
 int HashArray::getCountOfElements()
 {
 	return countOfElements;
+}
+bool comp(Shape* a, Shape* b)
+{
+	return a->getVolume() < b->getVolume();
+}
+void HashArray::sortElements()
+{
+	for (int i = 0; i < size; i++)
+	{
+		std::sort(arrayOfVectorsOfElements[i].begin(),
+			arrayOfVectorsOfElements[i].end(), comp);
+	}
 }

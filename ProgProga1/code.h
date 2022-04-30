@@ -8,6 +8,7 @@ public:
 	//virtual void setValues() = 0;
 	virtual void outElement(std::ostream& out, int counter) = 0;
 	virtual void outElement(std::ostream& out, int counter, int limit) = 0;
+	virtual int getVolume() = 0;
 	//Shape();
 protected:
 private:
@@ -21,6 +22,7 @@ public:
 	void setValues(int radius, int temperature);
 	void outElement(std::ostream& out, int counter);
 	void outElement(std::ostream& out, int counter, int limit);
+	int getVolume();
 	int getRadius();
 	int getTemperature();
 protected:
@@ -36,6 +38,7 @@ public:
 	void setValues(int heigth, int width, int depth, int temperature);
 	void outElement(std::ostream& out, int counter);
 	void outElement(std::ostream& out, int counter, int limit);
+	int getVolume();
 	int getHeigth();
 	int getWidth();
 	int getDepth();
@@ -89,9 +92,12 @@ public:
 	int makeHashOfShape(Tetraedr shapeToHash);
 	void setCountOfElements(int count);
 	int getCountOfElements();
+	void sortElements();
 	//std::pair <int, int> findElement();
 protected:
 	std::vector<Shape*> arrayOfVectorsOfElements[30];
 	int countOfElements;
 private:
+	int size = 30;
+	/*bool comp(Shape& a, Shape& b);*/
 };

@@ -57,7 +57,9 @@ public:
 	Tetraedr(int heigth);
 	void setValues(int heigth);
 	void outElement(std::ostream& out, int counter);
+	void outElement(std::ostream& out, int counter, int limit);
 	int getHeigth();
+	int getVolume();
 protected:
 	int heigth;
 };

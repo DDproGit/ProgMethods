@@ -85,9 +85,24 @@ int Parallelepiped::getTemperature()
 {
 	return temperature;
 }
+int Parallelepiped::getVolume()
+{
+	return this->heigth * this->width * this->depth;
+}
 
 void Parallelepiped::outElement(std::ostream& out, int counter)
 {
+	out << "Element number " << counter << " is a parallelepiped with edges: ";
+	out << heigth << ", ";
+	out << width << ", ";
+	out << depth << ", volume = ";
+	int tmp = this->getVolume();
+	out << tmp << "\n";
+};
+void Parallelepiped::outElement(std::ostream& out, int counter, int limit)
+{
+	if (limit == 2)
+		return;
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
@@ -114,28 +129,23 @@ void Tetraedr::outElement(std::ostream& out, int counter)
 	out << "Element number " << counter << " is a tetraedr with edge: ";
 	out << heigth << "\n";
 }
+void Tetraedr::outElement(std::ostream& out, int counter, int limit)
+{
+	if (limit == 3)
+		return;
+	out << "Element number " << counter << " is a tetraedr with edge: ";
+	out << heigth << "\n";
+}
 int Tetraedr::getHeigth()
 {
 	return heigth;
 }
-
-
-
-void Parallelepiped::outElement(std::ostream& out, int counter, int limit)
+int Tetraedr::getVolume()
 {
-	if (limit == 2)
-		return;
-	out << "Element number " << counter << " is a parallelepiped with edges: ";
-	out << heigth << ", ";
-	out << width << ", ";
-	out << depth << ", volume = ";
-	int tmp = this->getVolume();
-	out << tmp << "\n";
-};
-int Parallelepiped::getVolume()
-{
-	return heigth * width * depth;
+	return ((pow(this->heigth, 3) * sqrt(2))/12);
 }
+
+
 //dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
@@ -207,7 +217,7 @@ void HashArray::saveContainer(std::ostream & out)
 }
 void HashArray::showContainer()
 {
-	std::cout << "Show every element - 0, without spheres - 1, without parallelepipeds - 2: ";
+	std::cout << "Show every element - 0, without spheres - 1, without parallelepipeds - 2, without tetraedrs - 3: ";
 	int limiter = 0;
 	std::cin >> limiter;
 	int counter = 0;

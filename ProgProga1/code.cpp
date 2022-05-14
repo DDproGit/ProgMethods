@@ -1,6 +1,9 @@
 #include "code.h"
 #include <iostream>
+#include <string> 
+#include <fstream>
 #include <algorithm>
+#include <boost/algorithm/string.hpp>
 
 Sphere::Sphere()
 {
@@ -175,54 +178,130 @@ void Tetraedr::outElement(std::ostream& out, int counter, int limit)
 	outElement(out, counter);
 }
 
-
-//dlkasdad
 void HashArray::fillContainer(std::istream& in)
 {
+	std::string tmpstr;
+	std::getline(in, tmpstr);
 	int n = 0;
-	in >> n;
+	try
+	{
+		n = stoi(tmpstr);
+	}
+	catch(...)
+	{
+		std::cout << "Invalid count of elements\n";
+		exit(0);
+	}
 	for (int i = 0; i < n; i++)
 	{
-		int type = 0;
-		in >> type;
-		switch (type)
+		std::string inputline;
+		std::getline(in, inputline);
+		std::vector<std::string> split_vector;
+		boost::split(split_vector, inputline, boost::is_any_of(" "), boost::token_compress_on);
+		split_vector.erase(
+			std::remove_if(split_vector.begin(), split_vector.end(),
+				[](std::string const& s) { return s.size() == 0; }), split_vector.end());
+		int caser = -1;
+		try
 		{
-		case 0:
-		{
-			int radius, temperature = 0;
-			float density = 0.00;
-			in >> density;
-			in >> temperature;
-			in >> radius;
-			Sphere* tmp = new Sphere(radius, temperature, density);
-			tmp->outElement(std::cout, i);
-			this->addElement(tmp);
-			break;
+			caser = stoi(split_vector[0]);
 		}
-		case 1:
+		catch (...)
 		{
-			int heigth, width, depth, temperature = 0;
-			float density = 0.00;
-			in >> density;
-			in >> temperature;
-			in >> heigth >> width >> depth;
-			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature, density);
-			tmp->outElement(std::cout, i);
-			this->addElement(tmp);
-			break;
+			std::cout << "Invalid type of shape in line " << i << std::endl;
+			exit(0);
 		}
-		case 2:
+		switch (caser)
 		{
-			int heigth, temperature = 0;
-			float density = 0.00;
-			in >> density;
-			in >> temperature;
-			in >> heigth;
-			Tetraedr* tmp = new Tetraedr(heigth, temperature, density);
-			tmp->outElement(std::cout, i);
-			this->addElement(tmp);
-			break;
-		}
+			case 0:
+			{
+				if (split_vector.size() == 4)
+				{
+					try
+					{
+						int radius, temperature = 0;
+						float density = 0.00;
+						density = stof(split_vector[1]);
+						temperature = stoi(split_vector[2]);
+						radius = stoi(split_vector[3]);
+						Sphere* tmp = new Sphere(radius, temperature, density);
+						tmp->outElement(std::cout, i);
+						this->addElement(tmp);
+					}
+					catch (...)
+					{
+						std::cout << "Invalid arguments in line " << i+2;
+						exit(0);
+					}
+				}
+				else
+				{
+					std::cout << "Incorrect number of arguments \n";
+				}
+				break;
+			}
+			case 1:
+			{
+				if (split_vector.size() == 6)
+				{
+					try
+					{
+						int heigth, width, depth, temperature = 0;
+						float density = 0.00;
+						density = stof(split_vector[1]);
+						temperature = stoi(split_vector[2]);
+						heigth = stoi(split_vector[3]);
+						width = stoi(split_vector[4]);
+						depth = stoi(split_vector[5]);
+						Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature, density);
+						tmp->outElement(std::cout, i);
+						this->addElement(tmp);
+					}
+
+					catch (...)
+					{
+						std::cout << "Invalid arguments in line " << i+2;
+						exit(0);
+					}
+				}
+				else
+				{
+					std::cout << "Incorrect number of arguments \n";
+				}
+				break;
+			}
+			case 2:
+			{
+				if (split_vector.size() == 4)
+				{
+					try
+					{
+						int heigth, temperature = 0;
+						float density = 0.00;
+						density = stof(split_vector[1]);
+						temperature = stoi(split_vector[2]);
+						heigth = stoi(split_vector[3]);
+						Tetraedr* tmp = new Tetraedr(heigth, temperature, density);
+						tmp->outElement(std::cout, i);
+						this->addElement(tmp);
+					}
+					catch (...)
+					{
+						std::cout << "Invalid arguments in line " << i+2;
+						exit(0);
+					}
+				}
+				else
+				{
+					std::cout << "Incorrect number of arguments \n";
+				}
+				break;
+			}
+			default:
+			{
+				std::cout << "Wrong type of shape in line " << i+2 << std::endl;
+				break;
+			}
 		}
 	}
 	setCountOfElements(n);

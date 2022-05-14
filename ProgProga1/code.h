@@ -11,6 +11,7 @@ public:
 	virtual int getVolume() = 0;
 	//Shape();
 protected:
+	float density;
 private:
 };
 
@@ -18,12 +19,13 @@ class Sphere : public Shape
 {
 public:
 	Sphere();
-	Sphere(int radius, int temperature);
-	void setValues(int radius, int temperature);
+	Sphere(int radius, int temperature, float density);
+	void setValues(int radius, int temperature, float density);
 	void outElement(std::ostream& out, int counter);
 	void outElement(std::ostream& out, int counter, int limit);
 	int getVolume();
 	int getRadius();
+	float getDensity();
 	int getTemperature();
 protected:
 	int radius;
@@ -34,14 +36,15 @@ class Parallelepiped : public Shape
 {
 public:
 	Parallelepiped();
-	Parallelepiped(int heigth, int width, int depth, int temperature);
-	void setValues(int heigth, int width, int depth, int temperature);
+	Parallelepiped(int heigth, int width, int depth, int temperature, float density);
+	void setValues(int heigth, int width, int depth, int temperature, float density);
 	void outElement(std::ostream& out, int counter);
 	void outElement(std::ostream& out, int counter, int limit);
 	int getVolume();
 	int getHeigth();
 	int getWidth();
 	int getDepth();
+	float getDensity();
 	int getTemperature();
 protected:
 	int heigth;
@@ -54,14 +57,18 @@ class Tetraedr : public Shape
 {
 public:
 	Tetraedr();
-	Tetraedr(int heigth);
-	void setValues(int heigth);
+	Tetraedr(int heigth, int temperature, float density);
+	void setValues(int heigth, int temperature, float density);
 	void outElement(std::ostream& out, int counter);
 	void outElement(std::ostream& out, int counter, int limit);
-	int getHeigth();
 	int getVolume();
+	int getHeigth();
+	float getDensity();
+	int getTemperature();
+
 protected:
 	int heigth;
+	int temperature;
 };
 
 

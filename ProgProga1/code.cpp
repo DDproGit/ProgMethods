@@ -5,19 +5,22 @@
 Sphere::Sphere()
 {
 	radius = 0;
+	temperature = 0;
+	density = 0;
 }
-Sphere::Sphere(int radius, int temperature)
+Sphere::Sphere(int radius, int temperature, float density)
 {
 	this->radius = radius;
 	this->temperature = temperature;
+	this->density = density;
 }
 
-void Sphere::setValues(int radius, int temperature)
+void Sphere::setValues(int radius, int temperature, float density)
 {
 	this->radius = radius;
 	this->temperature = temperature;
+	this->density = density;
 }
-
 int Sphere::getRadius()
 {
 	return radius;
@@ -26,25 +29,31 @@ int Sphere::getTemperature()
 {
 	return temperature;
 }
+float Sphere::getDensity()
+{
+	return density;
+}
+int Sphere::getVolume()
+{
+	return 4 / 3 * 3.14 * getRadius();
+}
+
 
 void Sphere::outElement(std::ostream& out, int counter)
 {
 	out << "Element number " << counter << " is a sphere with radius: ";
-	out << radius << " " << temperature << "\n";
+	out << radius << ", ";
+	out << temperature << ", density = ";
+	out << density << ", volume = ";
+	out << getVolume() << "\n";
 };
 void Sphere::outElement(std::ostream& out, int counter, int limit)
 {
 	if (limit == 1)
 		return;
-	out << "Element number " << counter << " is a sphere with radius: ";
-	out << radius << ", volume = ";
-	int tmp = this->getVolume();
-	out << tmp << "\n";
+	outElement(out, counter);
 };
-int Sphere::getVolume()
-{
-	return 4 / 3 * 3.14 * getRadius();
-}
+
 
 
 Parallelepiped::Parallelepiped()
@@ -52,21 +61,25 @@ Parallelepiped::Parallelepiped()
 	heigth = 0;
 	width = 0;
 	depth = 0;
+	temperature = 0;
+	density = 0;
 }
-Parallelepiped::Parallelepiped(int heigth, int width, int depth, int temperature)
+Parallelepiped::Parallelepiped(int heigth, int width, int depth, int temperature, float density)
 {
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
 	this->temperature = temperature;
+	this->density = density;
 }
 
-void Parallelepiped::setValues(int heigth, int width, int depth, int temperature)
+void Parallelepiped::setValues(int heigth, int width, int depth, int temperature, float density)
 {
 	this->heigth = heigth;
 	this->width = width;
 	this->depth = depth;
 	this->temperature = temperature;
+	this->density = density;
 }
 
 int Parallelepiped::getHeigth()
@@ -85,6 +98,10 @@ int Parallelepiped::getTemperature()
 {
 	return temperature;
 }
+float Parallelepiped::getDensity()
+{
+	return this->density;
+}
 int Parallelepiped::getVolume()
 {
 	return this->heigth * this->width * this->depth;
@@ -95,54 +112,67 @@ void Parallelepiped::outElement(std::ostream& out, int counter)
 	out << "Element number " << counter << " is a parallelepiped with edges: ";
 	out << heigth << ", ";
 	out << width << ", ";
-	out << depth << ", volume = ";
-	int tmp = this->getVolume();
-	out << tmp << "\n";
+	out << depth << ", ";
+	out << temperature << ", density = ";
+	out << density << ", volume = ";
+	out << getVolume() << "\n";
 };
 void Parallelepiped::outElement(std::ostream& out, int counter, int limit)
 {
 	if (limit == 2)
 		return;
-	out << "Element number " << counter << " is a parallelepiped with edges: ";
-	out << heigth << ", ";
-	out << width << ", ";
-	out << depth << ", volume = ";
-	int tmp = this->getVolume();
-	out << tmp << "\n";
+	outElement(out, counter);
 };
 
 
 Tetraedr::Tetraedr()
 {
-	this->heigth = 0;
+	heigth = 0;
+	temperature = 0;
+	density = 0;
 }
-Tetraedr::Tetraedr(int heigth)
+Tetraedr::Tetraedr(int heigth, int temperature, float density)
 {
 	this->heigth = heigth;
+	this->temperature = temperature;
+	this->density = density;
 }
-void Tetraedr::setValues(int heigth)
+void Tetraedr::setValues(int heigth, int temperature, float density)
 {
 	this->heigth = heigth;
-}
-void Tetraedr::outElement(std::ostream& out, int counter)
-{
-	out << "Element number " << counter << " is a tetraedr with edge: ";
-	out << heigth << "\n";
-}
-void Tetraedr::outElement(std::ostream& out, int counter, int limit)
-{
-	if (limit == 3)
-		return;
-	out << "Element number " << counter << " is a tetraedr with edge: ";
-	out << heigth << "\n";
+	this->temperature = temperature;
+	this->density = density;
 }
 int Tetraedr::getHeigth()
 {
 	return heigth;
 }
+int Tetraedr::getTemperature()
+{
+	return temperature;
+}
+float Tetraedr::getDensity()
+{
+	return this->density;
+}
 int Tetraedr::getVolume()
 {
 	return ((pow(this->heigth, 3) * sqrt(2))/12);
+}
+
+void Tetraedr::outElement(std::ostream& out, int counter)
+{
+	out << "Element number " << counter << " is a tetraedr with edge: ";
+	out << heigth << ", ";
+	out << temperature << ", density = ";
+	out << density << ", volume = ";
+	out << getVolume() << "\n";
+}
+void Tetraedr::outElement(std::ostream& out, int counter, int limit)
+{
+	if (limit == 3)
+		return;
+	outElement(out, counter);
 }
 
 
@@ -160,37 +190,36 @@ void HashArray::fillContainer(std::istream& in)
 		case 0:
 		{
 			int radius, temperature = 0;
-			in >> radius >> temperature;
-			Sphere* tmp = new Sphere(radius, temperature);
-			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getRadius() << ", ";
-			std::cout << tmp->getTemperature() << " ";
-			std::cout << tmp->getVolume() << ". That's a sphere.\n";
+			float density = 0.00;
+			in >> density;
+			in >> temperature;
+			in >> radius;
+			Sphere* tmp = new Sphere(radius, temperature, density);
+			tmp->outElement(std::cout, i);
 			this->addElement(tmp);
 			break;
 		}
 		case 1:
 		{
 			int heigth, width, depth, temperature = 0;
-			in >> heigth >> width >> depth >> temperature;
-			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature);
-			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getHeigth() << ", ";
-			std::cout << tmp->getWidth() << ", ";
-			std::cout << tmp->getDepth() << ", ";
-			std::cout << tmp->getTemperature() << " ";
-			std::cout << tmp->getVolume() << ". That's a parallelepiped.\n";
-
+			float density = 0.00;
+			in >> density;
+			in >> temperature;
+			in >> heigth >> width >> depth;
+			Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature, density);
+			tmp->outElement(std::cout, i);
 			this->addElement(tmp);
 			break;
 		}
 		case 2:
 		{
-			int heigth = 0;
+			int heigth, temperature = 0;
+			float density = 0.00;
+			in >> density;
+			in >> temperature;
 			in >> heigth;
-			Tetraedr* tmp = new Tetraedr(heigth);
-			std::cout << "Element number " << i << ": ";
-			std::cout << tmp->getHeigth() << ". That's a tetraedr.\n";
+			Tetraedr* tmp = new Tetraedr(heigth, temperature, density);
+			tmp->outElement(std::cout, i);
 			this->addElement(tmp);
 			break;
 		}

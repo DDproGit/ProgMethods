@@ -1,18 +1,13 @@
-Element number 0 is a sphere with radius: 4 10
-Element number 1 is a parallelepiped with edges: 7, 10, 2, volume = 140
-Element number 2 is a parallelepiped with edges: 6, 5, 8, volume = 240
-Element number 3 is a parallelepiped with edges: 2, 3, 4, volume = 24
-Element number 4 is a parallelepiped with edges: 8, 3, 7, volume = 168
-Element number 5 is a sphere with radius: 3 43
-Element number 6 is a sphere with radius: 7 1
-Element number 7 is a parallelepiped with edges: 2, 1, 4, volume = 8
-Element number 8 is a sphere with radius: 11 3
-Element number 9 is a parallelepiped with edges: 3, 2, 5, volume = 30
-Element number 10 is a sphere with radius: 6 14
-Element number 11 is a sphere with radius: 6 2
-Element number 12 is a parallelepiped with edges: 6, 6, 9, volume = 324
-Element number 13 is a tetraedr with edge: 5
-Element number 14 is a parallelepiped with edges: 11, 5, 12, volume = 660
-Element number 15 is a tetraedr with edge: 14
-Element number 16 is a tetraedr with edge: 7
-Total number of objects: 17
+Element number 0 is a tetraedr with edge: 53, 74, density = 867.654, volume = 17545
+Element number 1 is a tetraedr with edge: 743, 64, density = 16.29, volume = 48339281
+Element number 2 is a sphere with radius: 64, 85, density = 213.32, volume = 200
+Element number 3 is a parallelepiped with edges: 13, 24, 51, 13, density = 96.75, volume = 15912
+Element number 4 is a parallelepiped with edges: 24, 74, 59, 26, density = 83.12, volume = 104784
+Element number 5 is a tetraedr with edge: 15, 45, density = 1.12, volume = 397
+Element number 6 is a sphere with radius: 96, 97, density = 23.67, volume = 301
+Element number 7 is a parallelepiped with edges: 41, 26, 85, 75, density = 39.25, volume = 90610
+Element number 8 is a tetraedr with edge: 26, 35, density = 38.58, volume = 2071
+Element number 9 is a sphere with radius: 151, 54, density = 327.121, volume = 474
+Element number 10 is a parallelepiped with edges: 13, 41, 15, 42, density = 152.23, volume = 7995
+Element number 11 is a sphere with radius: 43, 12, density = 2.35, volume = 135
+Total number of objects: 12

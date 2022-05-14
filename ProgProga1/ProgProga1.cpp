@@ -17,12 +17,20 @@ int main(int argc, char* argv[])
     ofstream out;
     if (argc != 3)
     {
-        cout << "Input file name \n";
-        cin >> filename;
-        in.open(filename);
-        cout << "Output file name \n";
-        cin >> filename;
-        out.open(filename);
+        while (in.is_open() != true)
+        {
+            cout << "Input file name \n";
+            cin >> filename;
+            in.open(filename);
+            cout << "Input file can't be opened";
+        }
+        while (out.is_open() != true)
+        {
+            cout << "Output file name \n";
+            cin >> filename;
+            out.open(filename);
+            cout << "Output file can't be opened";
+        }
     }
     else
     {
@@ -30,6 +38,20 @@ int main(int argc, char* argv[])
         in.open(filename);
         filename = argv[2];
         out.open(filename);
+        while (in.is_open() != true)
+        {
+            cout << "Input file name \n";
+            cin >> filename;
+            in.open(filename);
+            cout << "Input file can't be opened";
+        }
+        while (out.is_open() != true)
+        {
+            cout << "Output file name \n";
+            cin >> filename;
+            out.open(filename);
+            cout << "Output file can't be opened";
+        }
     }
     array.fillContainer(in);
     array.saveContainer(out);

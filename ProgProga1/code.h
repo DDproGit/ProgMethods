@@ -89,6 +89,9 @@ public:
 	void replaceElement(int hash, int place, Sphere newShape);
 	void replaceElement(int hash, int place, Parallelepiped newShape);
 	void replaceElement(int hash, int place, Tetraedr newShape);
+
+	void replaceShape(int hash, int place, Shape* newShape);
+
 	// Return element by hash and place
 	Shape* getElement(int hash, int place);
 	Sphere* getSphere(int hash, int place);

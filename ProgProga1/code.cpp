@@ -196,15 +196,16 @@ void HashArray::fillContainer(std::istream& in)
 	{
 		std::string inputline;
 		std::getline(in, inputline);
-		std::vector<std::string> split_vector;
-		boost::split(split_vector, inputline, boost::is_any_of(" "), boost::token_compress_on);
-		split_vector.erase(
-			std::remove_if(split_vector.begin(), split_vector.end(),
-				[](std::string const& s) { return s.size() == 0; }), split_vector.end());
+		std::vector<std::string> splitVector;
+		boost::split(splitVector, inputline, boost::is_any_of(" "), boost::token_compress_on);
+		splitVector.erase(
+			std::remove_if(splitVector.begin(), splitVector.end(),
+				[](std::string const& s) { return s.size() == 0; }), splitVector.end());
 		int caser = -1;
 		try
 		{
-			caser = stoi(split_vector[0]);
+			if (splitVector.size()>0)
+				caser = stoi(splitVector[0]);
 		}
 		catch (...)
 		{
@@ -215,15 +216,15 @@ void HashArray::fillContainer(std::istream& in)
 		{
 			case 0:
 			{
-				if (split_vector.size() == 4)
+				if (splitVector.size() == 4)
 				{
 					try
 					{
 						int radius, temperature = 0;
 						float density = 0.00;
-						density = stof(split_vector[1]);
-						temperature = stoi(split_vector[2]);
-						radius = stoi(split_vector[3]);
+						density = stof(splitVector[1]);
+						temperature = stoi(splitVector[2]);
+						radius = stoi(splitVector[3]);
 						Sphere* tmp = new Sphere(radius, temperature, density);
 						tmp->outElement(std::cout, i);
 						this->addElement(tmp);
@@ -242,17 +243,17 @@ void HashArray::fillContainer(std::istream& in)
 			}
 			case 1:
 			{
-				if (split_vector.size() == 6)
+				if (splitVector.size() == 6)
 				{
 					try
 					{
 						int heigth, width, depth, temperature = 0;
 						float density = 0.00;
-						density = stof(split_vector[1]);
-						temperature = stoi(split_vector[2]);
-						heigth = stoi(split_vector[3]);
-						width = stoi(split_vector[4]);
-						depth = stoi(split_vector[5]);
+						density = stof(splitVector[1]);
+						temperature = stoi(splitVector[2]);
+						heigth = stoi(splitVector[3]);
+						width = stoi(splitVector[4]);
+						depth = stoi(splitVector[5]);
 						Parallelepiped* tmp = new Parallelepiped(heigth, width, depth, temperature, density);
 						tmp->outElement(std::cout, i);
 						this->addElement(tmp);
@@ -272,15 +273,15 @@ void HashArray::fillContainer(std::istream& in)
 			}
 			case 2:
 			{
-				if (split_vector.size() == 4)
+				if (splitVector.size() == 4)
 				{
 					try
 					{
 						int heigth, temperature = 0;
 						float density = 0.00;
-						density = stof(split_vector[1]);
-						temperature = stoi(split_vector[2]);
-						heigth = stoi(split_vector[3]);
+						density = stof(splitVector[1]);
+						temperature = stoi(splitVector[2]);
+						heigth = stoi(splitVector[3]);
 						Tetraedr* tmp = new Tetraedr(heigth, temperature, density);
 						tmp->outElement(std::cout, i);
 						this->addElement(tmp);

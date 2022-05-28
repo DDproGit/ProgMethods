@@ -194,14 +194,12 @@ void HashArray::fillContainer(std::istream& in)
 	}
 	for (int i = 0; i < n; i++)
 	{
-		std::string inputline;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////// если объектов меньше, чем прочитанное n - ошибка
+		std::string inputline;
 		if (in.eof())
 		{
 			std::cout << "There are less shapes than stated! Exiting programm..." << std::endl;
 			exit(0);
 		}
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		std::getline(in, inputline);
 		std::vector<std::string> split_vector;
 		boost::split(split_vector, inputline, boost::is_any_of(" "), boost::token_compress_on);
@@ -313,7 +311,7 @@ void HashArray::fillContainer(std::istream& in)
 	}
 	if (!in.eof())
 	{
-		std::cout << "Something is wrong, eof isn't reached! Exiting programm..." << std::endl;/////////////////////////////////////////////////////////////////////////////////////
+		std::cout << "Something is wrong, eof isn't reached! Exiting programm..." << std::endl;
 		exit(0);
 	}
 	setCountOfElements(n);
@@ -340,11 +338,11 @@ void HashArray::showContainer()
 	std::cout << "Show every element - 0, without spheres - 1, without parallelepipeds - 2, without tetraedrs - 3: ";
 	int limiter = 0;
 	std::cin >> limiter;
-	while (limiter < 0 || limiter > 3) //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	while (limiter < 0 || limiter > 3)
 	{
 		std::cout << "Incorrect limiter is set! Try again!" << std::endl;
 		std::cin >> limiter;
-	}////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
 	int counter = 0;
 	for (int i = 0; i < 30; i++)
 	{
@@ -547,83 +545,9 @@ bool comp(Shape* a, Shape* b)
 }
 void HashArray::sortElements()
 {
-	/*for (int i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		std::sort(arrayOfVectorsOfElements[i].begin(),
 			arrayOfVectorsOfElements[i].end(), comp);
-	}*/
-	/*for (int x = 0; x < size; x++)
-	{
-		int length = arrayOfVectorsOfElements[x].size();
-		for (int i = 0; i < length - 1; i++)
-		{
-			for (int j = i + 1; j < length; j++)
-			{
-				if (comp(arrayOfVectorsOfElements[x][i], arrayOfVectorsOfElements[x][j]))
-				{
-					Shape* tmp = arrayOfVectorsOfElements[x][i];
-					arrayOfVectorsOfElements[x][i] = arrayOfVectorsOfElements[x][j];
-					arrayOfVectorsOfElements[x][j] = tmp;
-				}
-			}
-		}
-	}*/
-	/*for (int i = 0; i < 30; i++)
-	{
-		if (this->getSizeOfVector(i) != 0)
-		{
-			int size = this->getSizeOfVector(i);
-			for (int j = 0; j < size - 1; j++)
-			{
-				for (int z = j + 1; z < size; z++)
-				{
-					if (comp(this->getElement(i, j), this->getElement(i, z)))
-					{
-						Shape* tmp = this->getElement(i, j);
-						//this->getElement(i, j) = this->getElement(i, z);
-						this->replaceShape(i, j, this->getElement(i, z));
-						this->replaceShape(i, z, tmp);
-					}
-				}
-			}
-		}
-	}*/
-	std::vector<Shape*> vec;///////////////////////////////////////////////раньше не сортировалось
-	for (int i = 0; i < 30; i++)
-	{
-		if (this->getSizeOfVector(i) != 0)
-		{
-			int size = this->getSizeOfVector(i);
-			for (int j = 0; j < size; j++)
-			{
-				Shape* tmp = this->getElement(i, j);
-				vec.push_back(tmp);
-			}
-		}
-	}
-	for (int i = 0; i < vec.size() - 1; i++)
-	{
-		for (int j = i + 1; j < vec.size(); j++)
-		{
-			if (comp(vec[i], vec[j]))
-			{
-				Shape* tmp = vec[i];
-				vec[i] = vec[j];
-				vec[j] = tmp;
-			}
-		}
-	}
-	int pointer = 0;
-	for (int i = 0; i < 30; i++)
-	{
-		if (this->getSizeOfVector(i) != 0)
-		{
-			int size = this->getSizeOfVector(i);
-			for (int j = 0; j < size; j++)
-			{
-				this->replaceShape(i, j, vec[pointer]);
-				++pointer;
-			}
-		}
 	}
 }
